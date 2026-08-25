@@ -52,6 +52,37 @@
   animation: floatSlow 12s ease-in-out infinite;
 }
 
+/* GPU-Accelerated Hardware Keyframes for Preloader */
+@keyframes spinLinear {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: scale(0.94); opacity: 0.4; }
+  50% { transform: scale(1.04); opacity: 0.85; }
+}
+
+@keyframes progressFill {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-spin-hardware {
+  animation: spinLinear 12s linear infinite;
+  will-change: transform;
+}
+
+.animate-pulse-hardware {
+  animation: pulseGlow 2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-progress-fill {
+  animation: progressFill 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform;
+}
+
 /* Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
