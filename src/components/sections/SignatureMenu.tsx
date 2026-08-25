@@ -7,7 +7,11 @@ import { MenuDetailModal } from '../ui/MenuDetailModal';
 import { SIGNATURE_ITEMS, MenuItem } from '../../data/cafeData';
 import { CoffeeRingPattern } from '../ui/CoffeeRingPattern';
 
-export const SignatureMenu: React.FC = () => {
+interface SignatureMenuProps {
+  onNavigateToMenu?: () => void;
+}
+
+export const SignatureMenu: React.FC<SignatureMenuProps> = ({ onNavigateToMenu }) => {
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
 
   return (
@@ -38,14 +42,25 @@ export const SignatureMenu: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="mt-16 text-center"
         >
-          <a
-            href="#menu"
-            className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-green text-brand-ivory text-sm font-semibold uppercase tracking-[0.18em] hover:bg-brand-darkgreen transition-all transform hover:-translate-y-0.5 shadow-md group"
-          >
-            <Sparkles className="w-4 h-4 text-brand-tan" />
-            Explore Full Menu & Categories
-            <ArrowRight className="w-4 h-4 text-brand-tan group-hover:translate-x-1 transition-transform" />
-          </a>
+          {onNavigateToMenu ? (
+            <button
+              onClick={onNavigateToMenu}
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-green text-brand-ivory text-sm font-semibold uppercase tracking-[0.18em] hover:bg-brand-darkgreen transition-all transform hover:-translate-y-0.5 shadow-md group cursor-pointer border border-brand-tan/30"
+            >
+              <Sparkles className="w-4 h-4 text-brand-tan" />
+              <span>Explore Full Menu & Categories</span>
+              <ArrowRight className="w-4 h-4 text-brand-tan group-hover:translate-x-1 transition-transform" />
+            </button>
+          ) : (
+            <a
+              href="#menu"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-brand-green text-brand-ivory text-sm font-semibold uppercase tracking-[0.18em] hover:bg-brand-darkgreen transition-all transform hover:-translate-y-0.5 shadow-md group border border-brand-tan/30"
+            >
+              <Sparkles className="w-4 h-4 text-brand-tan" />
+              <span>Explore Full Menu & Categories</span>
+              <ArrowRight className="w-4 h-4 text-brand-tan group-hover:translate-x-1 transition-transform" />
+            </a>
+          )}
         </motion.div>
       </div>
 

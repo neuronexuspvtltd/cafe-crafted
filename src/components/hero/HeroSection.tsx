@@ -5,10 +5,14 @@ import { ScrollIndicator } from './ScrollIndicator';
 import { CoffeeRingPattern } from '../ui/CoffeeRingPattern';
 import heroBgImg from '../../assets/hero-bg.jpg';
 
-export const HeroSection: React.FC = () => {
+interface HeroSectionProps {
+  onNavigateToMenu?: () => void;
+}
+
+export const HeroSection: React.FC<HeroSectionProps> = ({ onNavigateToMenu }) => {
   return (
     <section id="home" className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-brand-darkgreen text-brand-ivory pt-28 pb-10">
-      {/* Background Photography — Actual Cafe Crafted Interior Photo (Lighter & More Vivid) */}
+      {/* Background Photography — Actual Cafe Crafted Interior Photo */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.img
           src={heroBgImg}
@@ -47,7 +51,7 @@ export const HeroSection: React.FC = () => {
           <span className="h-px w-6 bg-brand-tan/80"></span>
         </motion.div>
 
-        {/* High-Impact Minimal Headline with Text Drop Shadows for Legibility */}
+        {/* High-Impact Minimal Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
@@ -69,20 +73,30 @@ export const HeroSection: React.FC = () => {
           Good food. Beautiful spaces. Crafted moments.
         </motion.p>
 
-        {/* Minimal Action Buttons */}
+        {/* Action Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
           className="mt-10 flex flex-row items-center gap-4"
         >
-          <a
-            href="#menu"
-            className="px-8 py-3.5 rounded-full bg-brand-green hover:bg-brand-cream hover:text-brand-darkgreen text-brand-ivory text-xs font-semibold uppercase tracking-[0.2em] transition-all duration-300 transform hover:-translate-y-0.5 shadow-xl flex items-center gap-2.5 group border border-brand-tan/40"
-          >
-            <span>Explore Menu</span>
-            <ArrowRight className="w-3.5 h-3.5 text-brand-tan group-hover:text-brand-darkgreen group-hover:translate-x-1 transition-all" />
-          </a>
+          {onNavigateToMenu ? (
+            <button
+              onClick={onNavigateToMenu}
+              className="px-8 py-3.5 rounded-full bg-brand-green hover:bg-brand-cream hover:text-brand-darkgreen text-brand-ivory text-xs font-semibold uppercase tracking-[0.2em] transition-all duration-300 transform hover:-translate-y-0.5 shadow-xl flex items-center gap-2.5 group border border-brand-tan/40"
+            >
+              <span>Explore Menu</span>
+              <ArrowRight className="w-3.5 h-3.5 text-brand-tan group-hover:text-brand-darkgreen group-hover:translate-x-1 transition-all" />
+            </button>
+          ) : (
+            <a
+              href="#menu"
+              className="px-8 py-3.5 rounded-full bg-brand-green hover:bg-brand-cream hover:text-brand-darkgreen text-brand-ivory text-xs font-semibold uppercase tracking-[0.2em] transition-all duration-300 transform hover:-translate-y-0.5 shadow-xl flex items-center gap-2.5 group border border-brand-tan/40"
+            >
+              <span>Explore Menu</span>
+              <ArrowRight className="w-3.5 h-3.5 text-brand-tan group-hover:text-brand-darkgreen group-hover:translate-x-1 transition-all" />
+            </a>
+          )}
 
           <a
             href="#visit"

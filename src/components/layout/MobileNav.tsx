@@ -1,16 +1,48 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, MapPin, Phone, Instagram, Coffee, ArrowRight } from 'lucide-react';
+import { X, MapPin, Phone, Coffee, ArrowRight } from 'lucide-react';
 import { CAFE_INFO } from '../../data/cafeData';
 import logoImg from '../../assets/logo.png';
 
 interface MobileNavProps {
   isOpen: boolean;
   onClose: () => void;
-  navLinks: { name: string; href: string }[];
+  navLinks: { name: string; href: string; isMenuPage?: boolean }[];
+  currentPage: 'home' | 'menu';
+  onNavigateToHome: () => void;
+  onNavigateToMenu: () => void;
 }
 
-export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose, navLinks }) => {
+export const MobileNav: React.FC<MobileNavProps> = ({
+  isOpen,
+  onClose,
+  navLinks,
+  currentPage,
+  onNavigateToHome,
+  onNavigateToMenu,
+}) => {
+  const handleLinkClick = (link: { name: string; href: string; isMenuPage?: boolean }) => {
+    onClose();
+    if (link.isMenuPage) {
+      onNavigateToMenu();
+    } else {
+      if (currentPage === 'menu') {
+        onNavigateToHome();
+        setTimeout(() => {
+          const element = document.querySelector(link.href);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      } else {
+        const element = document.querySelector(link.href);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    }
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -67,20 +99,19 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose, navLinks 
               </span>
 
               {navLinks.map((link, idx) => (
-                <motion.a
+                <motion.button
                   key={link.name}
-                  href={link.href}
-                  onClick={onClose}
+                  onClick={() => handleLinkClick(link)}
                   initial={{ opacity: 0, x: -15 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: idx * 0.04 }}
-                  className="group flex items-center justify-between py-2.5 px-4 rounded-2xl bg-brand-cream/5 hover:bg-brand-cream/15 transition-all text-brand-ivory"
+                  className="group flex items-center justify-between py-2.5 px-4 rounded-2xl bg-brand-cream/5 hover:bg-brand-cream/15 transition-all text-brand-ivory text-left cursor-pointer"
                 >
                   <span className="font-serif text-xl sm:text-2xl font-normal group-hover:text-brand-tan transition-colors">
                     {link.name}
                   </span>
                   <ArrowRight className="w-4 h-4 text-brand-tan opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                </motion.a>
+                </motion.button>
               ))}
             </nav>
 
@@ -92,14 +123,16 @@ export const MobileNav: React.FC<MobileNavProps> = ({ isOpen, onClose, navLinks 
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <a
-                  href="#menu"
-                  onClick={onClose}
-                  className="w-full text-center py-3 px-4 rounded-full bg-brand-green text-brand-ivory font-semibold text-xs uppercase tracking-wider hover:bg-brand-cream hover:text-brand-darkgreen transition-all shadow-md flex items-center justify-center gap-2 border border-brand-tan/30"
+                <button
+                  onClick={() => {
+                    onClose();
+                    onNavigateToMenu();
+                  }}
+                  className="w-full text-center py-3 px-4 rounded-full bg-brand-green text-brand-ivory font-semibold text-xs uppercase tracking-wider hover:bg-brand-cream hover:text-brand-darkgreen transition-all shadow-md flex items-center justify-center gap-2 border border-brand-tan/30 cursor-pointer"
                 >
                   <Coffee className="w-3.5 h-3.5 text-brand-tan" />
-                  View Menu
-                </a>
+                  View Menu Page
+                </button>
 
                 <a
                   href={`tel:${CAFE_INFO.phone}`}

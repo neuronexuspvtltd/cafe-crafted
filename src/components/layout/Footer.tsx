@@ -1,126 +1,153 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Instagram, MapPin, Phone, Clock, ArrowUp, Heart } from 'lucide-react';
+import { ArrowUp, Instagram, MapPin, Phone, Heart } from 'lucide-react';
 import { CAFE_INFO } from '../../data/cafeData';
-import { CoffeeRingPattern } from '../ui/CoffeeRingPattern';
 import logoImg from '../../assets/logo.png';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onNavigateToHome?: () => void;
+  onNavigateToMenu?: () => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onNavigateToHome, onNavigateToMenu }) => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <footer className="relative bg-brand-darkgreen text-brand-ivory pt-20 pb-12 overflow-hidden border-t border-brand-cream/10">
-      {/* Background Coffee Ring Motif */}
-      <CoffeeRingPattern className="-bottom-24 -left-24" size={540} variant="light" opacity={0.05} />
-      <CoffeeRingPattern className="top-10 -right-20" size={420} variant="light" opacity={0.04} />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <footer className="bg-brand-darkgreen text-brand-ivory pt-20 pb-10 border-t border-brand-tan/15 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-brand-cream/10">
-          {/* Brand Intro Column (5 cols) */}
-          <div className="md:col-span-5 flex flex-col justify-between space-y-6">
-            <div>
-              <a href="#home" className="flex items-center gap-3 group mb-4">
-                <img
-                  src={logoImg}
-                  alt={CAFE_INFO.name}
-                  className="w-12 h-12 rounded-full object-cover border border-brand-cream/30 shadow-md"
-                />
-                <span className="font-serif text-3xl tracking-wide text-brand-ivory font-normal">
-                  Cafe Crafted
+          {/* Brand Info & Motto (4 cols) */}
+          <div className="md:col-span-4 flex flex-col items-start space-y-4">
+            <button
+              onClick={onNavigateToHome || scrollToTop}
+              className="flex items-center gap-3 group text-left cursor-pointer"
+            >
+              <img
+                src={logoImg}
+                alt={CAFE_INFO.name}
+                className="w-12 h-12 rounded-full object-cover border-2 border-brand-tan/80 shadow-md group-hover:scale-105 transition-transform"
+              />
+              <div className="flex flex-col">
+                <span className="font-serif text-2xl font-normal text-brand-ivory tracking-wide leading-none">
+                  {CAFE_INFO.name}
                 </span>
-              </a>
+                <span className="text-[10px] uppercase tracking-[0.25em] text-brand-tan font-medium mt-1">
+                  Ichalkaranji
+                </span>
+              </div>
+            </button>
+            <p className="text-sm font-light text-brand-cream/80 max-w-sm font-sans leading-relaxed">
+              "{CAFE_INFO.tagline}"
+              <br />
+              {CAFE_INFO.subTagline}
+            </p>
 
-              <p className="font-serif italic text-xl text-brand-tan max-w-sm">
-                "{CAFE_INFO.tagline}"
-              </p>
-
-              <p className="mt-4 text-xs sm:text-sm font-light text-brand-cream/70 leading-relaxed font-sans max-w-sm">
-                A sanctuary for slow brewing, wood-fired sourdough, beautiful spaces, and memorable moments in Ichalkaranji.
-              </p>
-            </div>
-
-            {/* Social Link */}
-            <div className="pt-2">
-              <a
-                href={CAFE_INFO.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-brand-cream/10 hover:bg-brand-cream hover:text-brand-darkgreen text-brand-ivory text-xs font-semibold uppercase tracking-wider transition-all border border-brand-cream/20"
-              >
-                <Instagram className="w-4 h-4 text-brand-tan" />
-                Follow {CAFE_INFO.instagram}
-              </a>
-            </div>
+            {/* Instagram Social Pill */}
+            <a
+              href={CAFE_INFO.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-cream/10 hover:bg-brand-cream/20 text-brand-tan text-xs font-semibold uppercase tracking-wider transition-colors border border-brand-cream/15 mt-2"
+            >
+              <Instagram className="w-4 h-4 text-brand-tan" />
+              <span>Follow {CAFE_INFO.instagram}</span>
+            </a>
           </div>
 
-          {/* Quick Navigation (3 cols) */}
-          <div className="md:col-span-3">
-            <span className="text-xs uppercase tracking-[0.25em] font-semibold text-brand-tan block mb-6">
-              NAVIGATION
+          {/* Quick Navigation Links (4 cols) */}
+          <div className="md:col-span-4 flex flex-col space-y-3">
+            <span className="text-xs uppercase tracking-[0.25em] text-brand-tan font-semibold block mb-2">
+              QUICK NAVIGATION
             </span>
-            <ul className="space-y-3 font-sans text-sm font-light">
+            <ul className="space-y-2.5 text-sm font-light text-brand-cream/90">
               <li>
-                <a href="#home" className="text-brand-cream/80 hover:text-brand-ivory transition-colors">Home</a>
+                <button
+                  onClick={onNavigateToHome || scrollToTop}
+                  className="hover:text-brand-tan transition-colors cursor-pointer"
+                >
+                  Home
+                </button>
               </li>
               <li>
-                <a href="#story" className="text-brand-cream/80 hover:text-brand-ivory transition-colors">Our Story</a>
+                <a href="#story" className="hover:text-brand-tan transition-colors">
+                  Our Story
+                </a>
               </li>
               <li>
-                <a href="#menu" className="text-brand-cream/80 hover:text-brand-ivory transition-colors">Specialty Menu</a>
+                <button
+                  onClick={onNavigateToMenu || scrollToTop}
+                  className="hover:text-brand-tan transition-colors text-brand-tan font-normal cursor-pointer"
+                >
+                  The Full Menu & Categories →
+                </button>
               </li>
               <li>
-                <a href="#experience" className="text-brand-cream/80 hover:text-brand-ivory transition-colors">The Atmosphere</a>
+                <a href="#experience" className="hover:text-brand-tan transition-colors">
+                  The Experience & Atmosphere
+                </a>
               </li>
               <li>
-                <a href="#instagram" className="text-brand-cream/80 hover:text-brand-ivory transition-colors">Gallery & Social</a>
+                <a href="#instagram" className="hover:text-brand-tan transition-colors">
+                  Instagram Reels
+                </a>
               </li>
               <li>
-                <a href="#visit" className="text-brand-cream/80 hover:text-brand-ivory transition-colors">Visit Cafe Crafted</a>
+                <a href="#visit" className="hover:text-brand-tan transition-colors">
+                  Visit & Location
+                </a>
               </li>
             </ul>
           </div>
 
-          {/* Location & Hours (4 cols) */}
-          <div className="md:col-span-4 space-y-6">
-            <span className="text-xs uppercase tracking-[0.25em] font-semibold text-brand-tan block mb-6">
-              VISIT & HOURS
+          {/* Location & Operating Hours (4 cols) */}
+          <div className="md:col-span-4 flex flex-col space-y-3">
+            <span className="text-xs uppercase tracking-[0.25em] text-brand-tan font-semibold block mb-2">
+              LOCATION & HOURS
             </span>
 
-            <div className="flex items-start gap-3 text-xs sm:text-sm font-light text-brand-cream/80">
+            <div className="flex items-start gap-2.5 text-sm font-light text-brand-cream/90 leading-relaxed">
               <MapPin className="w-4 h-4 text-brand-tan shrink-0 mt-1" />
               <span>{CAFE_INFO.address}</span>
             </div>
 
-            <div className="flex items-center gap-3 text-xs sm:text-sm font-light text-brand-cream/80">
-              <Clock className="w-4 h-4 text-brand-tan shrink-0" />
-              <span>Mon – Sun: 10:00 AM – 11:00 PM</span>
+            <div className="flex items-center gap-2.5 text-sm font-light text-brand-cream/90 pt-1">
+              <Phone className="w-4 h-4 text-brand-tan shrink-0" />
+              <a href={`tel:${CAFE_INFO.phone}`} className="hover:text-brand-tan transition-colors">
+                {CAFE_INFO.phone}
+              </a>
             </div>
 
-            <div className="flex items-center gap-3 text-xs sm:text-sm font-light text-brand-cream/80">
-              <Phone className="w-4 h-4 text-brand-tan shrink-0" />
-              <span>{CAFE_INFO.phone}</span>
+            <div className="pt-3 border-t border-brand-cream/10 mt-2">
+              <span className="text-xs uppercase text-brand-tan font-medium block mb-1">
+                Café Hours
+              </span>
+              <span className="text-xs font-light text-brand-cream/80 block">
+                Monday – Sunday: 10:00 AM – 11:00 PM
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar & Copyright */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-light text-brand-cream/60 font-sans">
-          <div>
-            © {new Date().getFullYear()} Cafe Crafted. All rights reserved. Ichalkaranji, Maharashtra.
+        {/* Bottom Rights & Back to Top */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-light text-brand-cream/60">
+          <div className="flex items-center gap-1">
+            <span>© {new Date().getFullYear()} {CAFE_INFO.name}. All rights reserved.</span>
           </div>
 
-          {/* Scroll to Top */}
-          <button
-            onClick={scrollToTop}
-            className="flex items-center gap-2 text-brand-tan hover:text-brand-ivory transition-colors uppercase tracking-widest text-[10px] font-semibold"
-          >
-            <span>Back To Top</span>
-            <div className="w-7 h-7 rounded-full bg-brand-cream/10 flex items-center justify-center border border-brand-cream/20">
-              <ArrowUp className="w-3.5 h-3.5" />
-            </div>
-          </button>
+          <div className="flex items-center gap-6">
+            <span className="flex items-center gap-1 text-[11px]">
+              Crafted with <Heart className="w-3 h-3 text-red-400 fill-red-400" /> in Ichalkaranji
+            </span>
+
+            <button
+              onClick={scrollToTop}
+              className="w-9 h-9 rounded-full bg-brand-cream/10 hover:bg-brand-cream/20 text-brand-tan flex items-center justify-center transition-colors border border-brand-cream/15 cursor-pointer"
+              aria-label="Back to top"
+            >
+              <ArrowUp className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </div>
     </footer>
