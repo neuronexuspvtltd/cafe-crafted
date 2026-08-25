@@ -18,18 +18,18 @@ export const TestimonialCarousel: React.FC = () => {
   const current = TESTIMONIALS[currentIndex];
 
   return (
-    <section className="relative py-24 md:py-36 bg-brand-ivory overflow-hidden">
+    <section className="relative pt-10 pb-20 md:py-36 bg-brand-ivory overflow-hidden">
       {/* Background Motif */}
       <CoffeeRingPattern className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" size={600} variant="green" opacity={0.03} />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
         {/* Large Decorative Quote Icon */}
-        <div className="w-16 h-16 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center mx-auto mb-8 border border-brand-green/20">
-          <Quote className="w-8 h-8 text-brand-green" />
+        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center mx-auto mb-6 sm:mb-8 border border-brand-green/20">
+          <Quote className="w-7 h-7 sm:w-8 sm:h-8 text-brand-green" />
         </div>
 
         {/* Carousel Content Container */}
-        <div className="min-h-[220px] flex items-center justify-center">
+        <div className="min-h-[200px] sm:min-h-[220px] flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={current.id}
@@ -65,10 +65,10 @@ export const TestimonialCarousel: React.FC = () => {
         </div>
 
         {/* Minimal Navigation Controls */}
-        <div className="mt-12 flex items-center justify-center gap-6">
+        <div className="mt-10 sm:mt-12 flex items-center justify-center gap-6">
           <button
             onClick={handlePrev}
-            className="w-12 h-12 rounded-full border border-brand-tan/30 text-brand-espresso hover:bg-brand-green hover:text-brand-ivory hover:border-brand-green transition-all duration-300 flex items-center justify-center focus:outline-none"
+            className="w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-brand-tan/30 text-brand-espresso hover:bg-brand-green hover:text-brand-ivory hover:border-brand-green transition-all duration-300 flex items-center justify-center focus:outline-none"
             aria-label="Previous review"
           >
             <ChevronLeft className="w-5 h-5" />
@@ -90,7 +90,7 @@ export const TestimonialCarousel: React.FC = () => {
 
           <button
             onClick={handleNext}
-            className="w-12 h-12 rounded-full border border-brand-tan/30 text-brand-espresso hover:bg-brand-green hover:text-brand-ivory hover:border-brand-green transition-all duration-300 flex items-center justify-center focus:outline-none"
+            className="w-11 h-11 sm:w-12 sm:h-12 rounded-full border border-brand-tan/30 text-brand-espresso hover:bg-brand-green hover:text-brand-ivory hover:border-brand-green transition-all duration-300 flex items-center justify-center focus:outline-none"
             aria-label="Next review"
           >
             <ChevronRight className="w-5 h-5" />

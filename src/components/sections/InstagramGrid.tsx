@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Instagram, Play, ExternalLink, Heart, Eye } from 'lucide-react';
+import { Instagram, Play, ExternalLink, Heart } from 'lucide-react';
 import { SectionHeading } from '../ui/SectionHeading';
 import { INSTAGRAM_REELS, CAFE_INFO, InstagramReel } from '../../data/cafeData';
 import { ReelModal } from '../ui/ReelModal';
@@ -11,7 +11,7 @@ export const InstagramGrid: React.FC = () => {
   const [hoveredReelId, setHoveredReelId] = useState<string | null>(null);
 
   return (
-    <section id="instagram" className="relative py-24 md:py-36 bg-brand-ivory overflow-hidden">
+    <section id="instagram" className="relative pt-16 pb-8 md:py-36 bg-brand-ivory overflow-hidden">
       {/* Background Coffee Ring Motif */}
       <CoffeeRingPattern className="-bottom-20 -right-20" size={540} variant="green" opacity={0.04} />
 
@@ -24,7 +24,7 @@ export const InstagramGrid: React.FC = () => {
         />
 
         {/* Profile Callout Header */}
-        <div className="mt-8 mb-12 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-3xl bg-brand-cream/60 border border-brand-tan/15">
+        <div className="mt-8 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-3xl bg-brand-cream/60 border border-brand-tan/15">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 p-0.5 shadow-md shrink-0">
               <div className="w-full h-full bg-brand-darkgreen rounded-full flex items-center justify-center text-brand-ivory">
@@ -60,7 +60,7 @@ export const InstagramGrid: React.FC = () => {
           - Mobile (< md): Horizontal swipe carousel with snap points & smooth scrolling
           - Desktop (>= md): 100% unchanged 3-column editorial grid
         */}
-        <div className="flex md:grid overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none gap-4 md:gap-8 pb-6 md:pb-0 px-4 -mx-4 md:px-0 md:mx-0 md:grid-cols-2 lg:grid-cols-3 no-scrollbar scroll-smooth">
+        <div className="flex md:grid overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none gap-4 md:gap-8 pb-4 md:pb-0 px-4 -mx-4 md:px-0 md:mx-0 md:grid-cols-2 lg:grid-cols-3 no-scrollbar scroll-smooth">
           {INSTAGRAM_REELS.map((reel) => {
             const isHovered = hoveredReelId === reel.id;
 
@@ -153,7 +153,7 @@ export const InstagramGrid: React.FC = () => {
         </div>
 
         {/* Mobile Swipe Hint Indicator */}
-        <div className="mt-4 text-center md:hidden">
+        <div className="mt-3 text-center md:hidden">
           <span className="text-[11px] font-medium text-brand-espresso/60 uppercase tracking-widest flex items-center justify-center gap-1.5">
             <span>← Swipe horizontally to view all reels →</span>
           </span>
