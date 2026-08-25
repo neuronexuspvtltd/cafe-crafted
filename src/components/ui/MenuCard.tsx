@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Sparkles, Eye } from 'lucide-react';
 import { MenuItem } from '../../data/cafeData';
 
@@ -38,11 +37,6 @@ export const MenuCard: React.FC<MenuCardProps> = ({ item, onSelect }) => {
               Special
             </span>
           )}
-        </div>
-
-        {/* Price Tag Overlay */}
-        <div className="absolute bottom-3 right-3 px-3.5 py-1.5 rounded-full bg-brand-darkgreen/90 text-brand-ivory font-serif text-lg font-semibold tracking-wide backdrop-blur-md shadow-md border border-brand-cream/20">
-          {item.price}
         </div>
 
         {/* Hover Overlay Hint */}

@@ -64,10 +64,6 @@ export const MenuDetailModal: React.FC<MenuDetailModalProps> = ({ item, onClose 
                 {item.name}
               </h3>
 
-              <div className="mt-3 font-serif text-3xl text-brand-green font-medium">
-                {item.price}
-              </div>
-
               <p className="mt-4 text-sm text-brand-espresso/80 font-light leading-relaxed">
                 {item.description}
               </p>
